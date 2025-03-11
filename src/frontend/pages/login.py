@@ -31,15 +31,15 @@ def main():
 
     email_label = ttk.Label(frm, text="E-mail:", font=("Arial", 12))
     email_label.pack(anchor="w")
-    email_entry = ttk.Entry(frm, width=30)
+    email_entry = ttk.Entry(frm, width=60)
     email_entry.pack(pady=(0, 10))
 
     senha_label = ttk.Label(frm, text="Senha:", font=("Arial", 12))
     senha_label.pack(anchor="w")
-    senha_entry = ttk.Entry(frm, width=30, show="*")
+    senha_entry = ttk.Entry(frm, width=60, show="*")
     senha_entry.pack(pady=(0, 20))
 
-    img_continue = Image.open("src/frontend/assets/images/continue.png").resize((200, 60), Image.Resampling.LANCZOS)
+    img_continue = Image.open("src/frontend/assets/images/Continue.png").resize((200, 60), Image.Resampling.LANCZOS)
     img_continue = ImageTk.PhotoImage(img_continue)
     continue_button = tk.Button(frm, image=img_continue, borderwidth=0, command=lambda: print("Login realizado!"))
     continue_button.image = img_continue  
