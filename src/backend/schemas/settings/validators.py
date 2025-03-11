@@ -17,6 +17,14 @@ def validate_email(cls, value: str) -> str:
     - Returns:
         - str: The email value.
     """
+
+    if not value:
+
+        raise ValidationError(
+            field="email",
+            detail=ERROR_USER_REQUIRED_FIELD_EMAIL
+        )
+
     if not isinstance(value, str):
         raise ValidationError(field="email", detail=ERROR_EMAIL_INVALID_FORMAT_TYPE)
     
@@ -53,6 +61,12 @@ def validate_name(cls, value: str) -> str:
     - Returns:
         - str: The name value.
     """
+    if not value:
+        raise ValidationError(
+            "name",
+            ERROR_USER_REQUIRED_FIELD_NAME
+        )
+
     if not isinstance(value, str):
         raise ValidationError(field="name", detail=ERROR_NAME_INVALID_FORMAT_TYPE)
     
@@ -76,6 +90,12 @@ def validate_password(cls, value: str) -> str:
     - Returns:
         - str: The password value.
     """
+    if not value:
+        raise ValidationError(
+            "password",
+            ERROR_USER_REQUIRED_FIELD_PASSWORD
+        )
+
     if not isinstance(value, str):
         raise ValidationError(field="password", detail=ERROR_PASSWORD_INVALID_FORMAT_TYPE)
     
