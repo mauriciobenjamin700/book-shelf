@@ -17,3 +17,12 @@ def mock_UserRegister_data():
         "email": "user@example.com",
         "password": "password1A-"
     }
+
+@pytest.fixture
+def mock_UserResponse_data():
+    return {
+        "id": "password1A-",
+        "name": "Tester",
+        "email": "user@example.com",
+        
+    }
