@@ -12,8 +12,8 @@ class UserServices:
         - register
     """
 
-    def login():
+    def login(request: UserLogin) -> UserResponse:
         pass
 
-    def register():
+    def register(request: UserRegister) -> UserResponse:
         pass
