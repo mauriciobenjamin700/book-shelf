@@ -1,4 +1,4 @@
-ERROR_USER_REQUIRED_FIELD_NAME = "Nome é obrigatório"
+ERROR_USER_REQUIRED_FIELD_USERNAME = "Nome é obrigatório"
 ERROR_USER_REQUIRED_FIELD_EMAIL = "E-mail é obrigatório"
 ERROR_USER_REQUIRED_FIELD_PASSWORD = "A senha é obrigatória"
 
@@ -14,5 +14,5 @@ ERROR_PASSWORD_INVALID_FORMAT_LOWERCASE = "A senha deve conter pelo menos um car
 ERROR_PASSWORD_INVALID_FORMAT_UPPERCASE = "A senha deve conter pelo menos um caractere maiúsculo"
 ERROR_PASSWORD_INVALID_FORMAT_SPECIAL_CHARACTER = "A senha deve conter pelo menos um caractere especial"
 
-ERROR_NAME_INVALID_FORMAT_TYPE = "O nome deve ser uma string"
-ERROR_NAME_INVALID_FORMAT_MIN_LENGTH = "O nome deve ter pelo menos 2 caracteres"
+ERROR_USERNAME_INVALID_FORMAT_TYPE = "O nome deve ser uma string"
+ERROR_USERNAME_INVALID_FORMAT_MIN_LENGTH = "O nome deve ter pelo menos 2 caracteres"

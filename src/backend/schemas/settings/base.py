@@ -19,8 +19,8 @@ class BaseSchema(BaseModel):
         Converts the schema to a dictionary.
 
         - Args:
-            - exclude_fields: list[str]: A list of field names to exclude from the resulting dictionary.
-            - include_fields: dict: A dictionary of field names and their values to include in the resulting dictionary.
+            - exclude_fields: list[str]: A list of field usernames to exclude from the resulting dictionary.
+            - include_fields: dict: A dictionary of field usernames and their values to include in the resulting dictionary.
             - exclude_none: bool: A flag indicating whether to exclude fields with a value of None from the resulting dictionary.
 
         - Returns:

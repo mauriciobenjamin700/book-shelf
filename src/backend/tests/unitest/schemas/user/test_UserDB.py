@@ -19,19 +19,19 @@ def test_UserDB_success(mock_UserRegister_data):
     # Assert
     
     assert isinstance(schema.id, str)
-    assert schema.name == data.get("name").upper()
+    assert schema.username == data.get("username").upper()
     assert schema.email == data.get('email')
     assert schema.password == data.get('password')
     assert isinstance(schema.created_at, str)
     assert isinstance(schema.updated_at, str)
 
 
-def test_UserDB_fail_name_required(mock_UserRegister_data):
+def test_UserDB_fail_username_required(mock_UserRegister_data):
 
     # Arrange
 
     data = mock_UserRegister_data
-    del data["name"]
+    del data["username"]
 
     # Act
 
@@ -40,16 +40,16 @@ def test_UserDB_fail_name_required(mock_UserRegister_data):
 
     # Assert
     
-    assert e.value.field == "name"
-    assert e.value.detail == ERROR_USER_REQUIRED_FIELD_NAME
+    assert e.value.field == "username"
+    assert e.value.detail == ERROR_USER_REQUIRED_FIELD_USERNAME
 
 
-def test_UserDB_fail_name_type(mock_UserRegister_data):
+def test_UserDB_fail_username_type(mock_UserRegister_data):
 
     # Arrange
 
     data = mock_UserRegister_data
-    data["name"] = 123
+    data["username"] = 123
 
     # Act
 
@@ -58,16 +58,16 @@ def test_UserDB_fail_name_type(mock_UserRegister_data):
 
     # Assert
     
-    assert e.value.field == "name"
-    assert e.value.detail == ERROR_NAME_INVALID_FORMAT_TYPE
+    assert e.value.field == "username"
+    assert e.value.detail == ERROR_USERNAME_INVALID_FORMAT_TYPE
 
 
-def test_UserDB_fail_name_minlength(mock_UserRegister_data):
+def test_UserDB_fail_username_minlength(mock_UserRegister_data):
 
     # Arrange
 
     data = mock_UserRegister_data
-    data["name"] = "a"
+    data["username"] = "a"
 
     # Act
 
@@ -76,8 +76,8 @@ def test_UserDB_fail_name_minlength(mock_UserRegister_data):
 
     # Assert
     
-    assert e.value.field == "name"
-    assert e.value.detail == ERROR_NAME_INVALID_FORMAT_MIN_LENGTH
+    assert e.value.field == "username"
+    assert e.value.detail == ERROR_USERNAME_INVALID_FORMAT_MIN_LENGTH
 
 
 def test_UserDB_fail_email_required(mock_UserRegister_data):

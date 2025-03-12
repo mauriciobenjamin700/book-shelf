@@ -52,7 +52,7 @@ def message_field(title: str = "Mensagem", description: str = "Mensagem", exampl
     
     return base_field(title, description, example)
 
-def name_field(title: str = "Nome", description: str = "Nome", example: str = "Jose") -> Field:
+def username_field(title: str = "Nome", description: str = "Nome", example: str = "Jose") -> Field:
     
     return base_field(title, description, example)
 

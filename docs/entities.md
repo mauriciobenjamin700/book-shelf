@@ -3,7 +3,7 @@
 ## User
 
 - id: str
-- name: str
+- username: str
 - email: str
 - password: str
 - created_at: datetime
@@ -12,7 +12,7 @@
 ## Book
 
 - id: str
-- name: str
+- username: str
 - author: str
 - pages: int
 - year: str

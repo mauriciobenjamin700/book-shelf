@@ -15,7 +15,7 @@ def mock_UserLogin_data():
 @pytest.fixture
 def mock_UserRegister_data():
     return {
-        "name": "Tester",
+        "username": "Tester",
         "email": "user@example.com",
         "password": "password1A-"
     }
@@ -24,7 +24,7 @@ def mock_UserRegister_data():
 def mock_UserResponse_data():
     return {
         "id": "password1A-",
-        "name": "Tester",
+        "username": "Tester",
         "email": "user@example.com",
         "created_at": get_current_date(),
         "updated_at": get_current_date()

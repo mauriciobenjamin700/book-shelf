@@ -50,30 +50,30 @@ def validate_is_admin(cls, value: bool) -> bool:
         raise ValidationError(field="is_admin", detail=ERROR_IS_ADMIN_INVALID_FORMAT_TYPE)
     return value
 
-@field_validator("name", mode="before")
-def validate_name(cls, value: str) -> str:
+@field_validator("username", mode="before")
+def validate_username(cls, value: str) -> str:
     """
-    A function that validates the name field.
+    A function that validates the username field.
 
     - Args:
         - cls: The class instance.
-        - value: The name value.
+        - value: The username value.
     - Returns:
-        - str: The name value.
+        - str: The username value.
     """
     if not value:
         raise ValidationError(
-            "name",
-            ERROR_USER_REQUIRED_FIELD_NAME
+            "username",
+            ERROR_USER_REQUIRED_FIELD_USERNAME
         )
 
     if not isinstance(value, str):
-        raise ValidationError(field="name", detail=ERROR_NAME_INVALID_FORMAT_TYPE)
+        raise ValidationError(field="username", detail=ERROR_USERNAME_INVALID_FORMAT_TYPE)
     
     value = value.strip()
     
     if len(value) <= 1:
-        raise ValidationError(field="name", detail=ERROR_NAME_INVALID_FORMAT_MIN_LENGTH)
+        raise ValidationError(field="username", detail=ERROR_USERNAME_INVALID_FORMAT_MIN_LENGTH)
     
     value = value.upper()
     
@@ -145,23 +145,23 @@ def validate_phone(cls, value: str) -> str:
     return value
 
 
-@field_validator("username", mode="before")
-def validate_username(cls, value: str) -> str:
+@field_validator("userusername", mode="before")
+def validate_userusername(cls, value: str) -> str:
     """
-    A function that validates the username field.
+    A function that validates the userusername field.
 
     - Args:
         - cls: The class instance.
-        - value: The username value.
+        - value: The userusername value.
     - Returns:
-        - str: The username value.
+        - str: The userusername value.
     """
     if not isinstance(value, str):
-        raise ValidationError(field="username", detail=ERROR_USERNAME_INVALID_FORMAT_TYPE)
+        raise ValidationError(field="userusername", detail=ERROR_USERUSERNAME_INVALID_FORMAT_TYPE)
     
     value = value.strip()
     
     if len(value) <= 1:
-        raise ValidationError(field="username", detail=ERROR_USERNAME_INVALID_FORMAT_MIN_LENGTH)
+        raise ValidationError(field="userusername", detail=ERROR_USERUSERNAME_INVALID_FORMAT_MIN_LENGTH)
     
     return value

@@ -4,6 +4,9 @@ from src.backend.schemas.user import (
     UserRegister,
     UserResponse
 )
+from src.backend.db.settings.connection import DatabaseManager
+from src.backend.utils.generate import get_current_date
+from src.backend.utils.security.password import protect, verify
 
 
 class UserRepository:
@@ -16,8 +19,12 @@ class UserRepository:
         - update
         - delete
     """
+    def __init__(self):
+        self.db = DatabaseManager()
+        self.db.connect()
+        self.table_name = 'users'
 
-    def create(data: UserDB) -> UserResponse:
+    def create(self, data: UserDB) -> UserResponse:
         """
         Create a new user register in database
 
@@ -27,9 +34,21 @@ class UserRepository:
         - Returns
             - UserResponse: User data after register
         """
-        pass
+        
+        data.password = protect(data.password)
+        
+        id = data.id
+        """
+        update_time {
+            seconds: 1741819898
+            nanos: 156255000
+        }
+        """
+        self.db.connection.collection(self.table_name).document(id).set(data.to_dict())
+                
+        return UserResponse(**data.to_dict())
 
-    def get(data: UserLogin) -> UserResponse | None:
+    def get(self, data: UserLogin) -> UserResponse | None:
         """
         Get a user in database if the credentials are correct
 
@@ -40,9 +59,19 @@ class UserRepository:
             - UserResponse: If the credentials are correct, return respective user data
             - None: If the credentials are incorrect, return None
         """
-        pass
+        #response = self.db.connection.collection(self.table_name).where('email', '==', data.email).stream()
+        
+        response = self.__get_reference(data.email).get()
+        
+        response = response.to_dict()
+        
+        if verify(data.password, response['password']):
+        
+            return UserResponse(**response)
+        
+        return None
 
-    def update(data: UserRegister) -> UserResponse:
+    def update(self, data: UserRegister) -> UserResponse | None:
         """
         Update user data on database
 
@@ -52,13 +81,47 @@ class UserRepository:
         - Returns:
             - UserResponse: User data after update
         """
-        pass
+        
+        user_ref = self.__get_reference(data.email)
+        
+        user_ref.update({"username": data.username, "password": protect(data.password), "updated_at": get_current_date()})   
+        
 
-    def delete(data: UserLogin) -> bool:
+    def delete(self, data: UserLogin) -> bool:
         """
         Delete user data on database
 
         - Args:
             - data: UserLogin
         """
-        pass
+        
+        try:
+        
+            user_ref = self.__get_reference(data.email)
+            
+            user_ref.delete()
+        
+            return True
+        
+        except:
+        
+            return False
+
+        
+    def __get_reference(self, email: str):
+        """
+        Get the user reference in database
+
+        - Args:
+            - email: str: User email
+
+        - Returns:
+            - DocumentReference: User reference in database
+        """
+        response = self.db.connection.collection(self.table_name).where('email', '==', email).stream()
+        
+        for doc in response:
+            response = doc.reference
+            break
+        
+        return response
