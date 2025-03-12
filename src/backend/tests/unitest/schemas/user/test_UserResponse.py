@@ -21,6 +21,8 @@ def test_UserResponse_success(mock_UserResponse_data):
     assert schema.id == data.get("id")
     assert schema.name == data.get("name").upper()
     assert schema.email == data.get('email')
+    assert schema.created_at == data.get("created_at")
+    assert schema.created_at == data.get("updated_at")
 
 
 

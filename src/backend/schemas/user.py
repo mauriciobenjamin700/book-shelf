@@ -86,10 +86,14 @@ class UserResponse(BaseSchema):
         - id: str
         - name: str
         - email: str
+        - created_at: str
+        - updated_at: str
     """
     id: str = id_field()
     name: str = name_field()
     email: str = email_field()
+    created_at: str = created_at_field(generate=False)
+    updated_at: str = created_at_field(generate=False)
     
     _name_validator = validate_name
     _email_validator = validate_email

@@ -1,5 +1,7 @@
 import pytest
 
+from src.backend.utils.generate import get_current_date
+
 
 ######################## Data
 
@@ -24,5 +26,7 @@ def mock_UserResponse_data():
         "id": "password1A-",
         "name": "Tester",
         "email": "user@example.com",
+        "created_at": get_current_date(),
+        "updated_at": get_current_date()
         
     }

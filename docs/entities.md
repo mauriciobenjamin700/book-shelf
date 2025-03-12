@@ -14,6 +14,7 @@
 - id: str
 - name: str
 - author: str
+- pages: int
 - year: str
 - gender: str
 - description: str
