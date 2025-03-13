@@ -56,7 +56,7 @@ class UserServices:
             user = self.__repo.get(request)
             
             if not user:
-                raise RequestError(ERROR_USER_NOT_FOUND)
+                raise RequestError(404, ERROR_USER_NOT_FOUND)
             
             return user
             
