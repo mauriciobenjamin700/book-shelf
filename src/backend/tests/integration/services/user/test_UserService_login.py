@@ -10,11 +10,11 @@ from src.backend.services.user import UserServices
 
 
 
-def test_UserService_login(mock_UserModel, mock_UserLogin_data):
+def test_UserService_login(mock_UserModel, mock_UserLogin):
 
     # Arrange
     data_db = UserModel(**mock_UserModel.to_dict())
-    request = UserLogin(**mock_UserLogin_data.to_dict())
+    request = UserLogin(**mock_UserLogin.to_dict())
     service = UserServices()
     repository = UserRepository()
 
@@ -22,7 +22,7 @@ def test_UserService_login(mock_UserModel, mock_UserLogin_data):
 
     # Act
 
-    response = repository.login(request)
+    response = service.login(request)
 
     # Assert
 
@@ -43,7 +43,7 @@ def test_UserService_login(mock_UserModel, mock_UserLogin_data):
 def test_UserService_login_invalid_input(mock_UserLogin_data):
     # Arrange
 
-    request = mock_UserLogin_data.to_dict()
+    request = mock_UserLogin_data.copy()
     repository = UserServices()
 
     # Act
@@ -61,10 +61,10 @@ def test_UserService_login_invalid_input(mock_UserLogin_data):
 def test_UserService_login_not_found(mock_UserRegister_data):
     # Arrange
 
-    data_db = UserModel(**mock_UserRegister_data.to_dict())
+    data_db = UserModel(**mock_UserRegister_data)
     request = UserLogin(
-        email=mock_UserRegister_data.email,
-        password="wrong_password",
+        email=mock_UserRegister_data["email"],
+        password="wrong_passworD1",
     )
     service = UserServices()
     repository = UserRepository()
@@ -74,16 +74,16 @@ def test_UserService_login_not_found(mock_UserRegister_data):
     # Act
 
     with raises(RequestError) as e:
-        repository.login(request)
+        service.login(request)
 
     # Assert
 
-    assert e.value.code == 404
+    assert e.value.status_code == 404
     assert e.value.detail == ERROR_USER_NOT_FOUND
 
     repository.delete(
         UserLogin(
-            email=mock_UserRegister_data.email,
-            password=mock_UserRegister_data.password,
+            email=mock_UserRegister_data["email"],
+            password=mock_UserRegister_data["password"],
         )
     )

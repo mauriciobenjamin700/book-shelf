@@ -47,3 +47,9 @@ def mock_UserLogin(mock_UserLogin_data):
     return UserLogin(
         **mock_UserLogin_data
     )
+    
+@pytest.fixture
+def mock_UserRegister(mock_UserRegister_data):
+    return UserRegister(
+        **mock_UserRegister_data
+    )
