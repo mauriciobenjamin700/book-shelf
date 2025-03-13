@@ -12,12 +12,10 @@
 ## Book
 
 - id: str
-- username: str
+- title: str
 - author: str
 - pages: int
-- year: str
-- gender: str
-- description: str
+- year: int
 - created_at: str
 - updated_at: str
 

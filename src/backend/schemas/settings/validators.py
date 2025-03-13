@@ -1,9 +1,9 @@
 from pydantic import field_validator
 from re import match
 
-from src.backend.schemas.settings.base import ValidationError
+from src.backend.constants.messages.book import *
 from src.backend.constants.messages.user import *
-
+from src.backend.schemas.settings.base import ValidationError
 
 
 @field_validator("email", mode="before")
@@ -121,47 +121,91 @@ def validate_password(cls, value: str) -> str:
     
     return value
 
-@field_validator("phone", mode="before")
-def validate_phone(cls, value: str) -> str:
+@field_validator("title", mode="before")
+def validate_title(cls, value: str) -> str:
     """
-    A function that validates the phone field.
+    A function that validates the title field.
 
     - Args:
         - cls: The class instance.
-        - value: The phone value.
+        - value: The title value.
     - Returns:
-        - str: The phone value.
+        - str: The title value.
     """
+    if not value:
+        raise ValidationError(
+            "title",
+            ERROR_USER_REQUIRED_FIELD_TITLE
+        )
+
     if not isinstance(value, str):
-        raise ValidationError(field="phone", detail=ERROR_PHONE_INVALID_FORMAT_TYPE)
+        raise ValidationError(field="title", detail=ERROR_TITLE_INVALID_FORMAT_TYPE)
     
     value = value.strip()
+    value = value.upper()
     
-    value = "".join([char for char in value if char.isdigit()])
+    if len(value) <= 1:
+        raise ValidationError(field="title", detail=ERROR_TITLE_INVALID_FORMAT_MIN_LENGTH)
     
-    if len(value) < 11:
-        raise ValidationError(field="phone", detail=ERROR_PHONE_INVALID_FORMAT_LENGTH)
+    if len(value) > 255:
+        raise ValidationError(field="title", detail=ERROR_TITLE_INVALID_FORMAT_MAX_LENGTH)
+    
+    
+    return value
+
+@field_validator("author", mode="before")
+def validate_author(cls, value: str) -> str:
+    """
+    A function that validates the author field.
+    
+    - Args:
+        - cls: The class instance.
+        - value: The username value.
+    - Returns:
+        - str: The username value.
+    """
+    if not value:
+        raise ValidationError(
+            "author",
+            ERROR_AUTHOR_REQUIRED_FIELD_AUTHOR
+        )
+
+    if not isinstance(value, str):
+        raise ValidationError(field="title", detail=ERROR_AUTHOR_INVALID_FORMAT_TYPE)
+    
+    value = value.strip()
+    value = value.upper()
+    
+    if len(value) <= 1:
+        raise ValidationError(field="title", detail=ERROR_AUTHOR_INVALID_FORMAT_MIN_LENGTH)
+    
+    if len(value) > 255:
+        raise ValidationError(field="title", detail=ERROR_AUTHOR_INVALID_FORMAT_MAX_LENGTH)
+    
     
     return value
 
 
-@field_validator("userusername", mode="before")
-def validate_userusername(cls, value: str) -> str:
-    """
-    A function that validates the userusername field.
+@field_validator("pages", mode="before")
+def validate_pages(cls, value: int):
+    
+    if not isinstance(value, int):
+        raise ValidationError(field="pages", detail=ERROR_PAGES_INVALID_FORMAT_TYPE)
+    
+    if value <= 0:
+        raise ValidationError(field="pages", detail=ERROR_PAGES_INVALID_FORMAT_MIN_VALUE)
+    
+    return value
 
-    - Args:
-        - cls: The class instance.
-        - value: The userusername value.
-    - Returns:
-        - str: The userusername value.
-    """
-    if not isinstance(value, str):
-        raise ValidationError(field="userusername", detail=ERROR_USERUSERNAME_INVALID_FORMAT_TYPE)
+
+@field_validator("year", mode="before")
+def validate_year(cls, value: int):
     
-    value = value.strip()
+    if not isinstance(value, int):
+        raise ValidationError(field="year", detail=ERROR_YEAR_INVALID_FORMAT_TYPE)
     
-    if len(value) <= 1:
-        raise ValidationError(field="userusername", detail=ERROR_USERUSERNAME_INVALID_FORMAT_MIN_LENGTH)
+    if value <= 0:
+        raise ValidationError(field="year", detail=ERROR_YEAR_INVALID_FORMAT_MIN_VALUE)
+    
     
     return value
