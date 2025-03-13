@@ -15,7 +15,7 @@ def base_field(title: str, description: str, example: str) -> Field:
 def created_at_field(
         title: str = "Data", 
         description:str = "Data de Criação", 
-        example: str = "2025-12-25", 
+        example: str = "2025-12-25 00:00:00", 
         generate: bool = False
     ) -> Field:
 
@@ -68,4 +68,6 @@ def value_field(title: str = "Valor", description: str = "Valor", example: float
     
     return base_field(title, description, example)
 
+def str_field(title: str = "Texto", description: str = "Texto", example: str = "Texto") -> Field:
     
+    return base_field(title, description, example)
