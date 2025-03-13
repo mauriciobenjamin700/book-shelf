@@ -7,4 +7,4 @@ def id_generate() -> str:
 
 
 def get_current_date() -> str:
-    return str(datetime.now().strftime("%Y-%m-%d"))
+    return str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))

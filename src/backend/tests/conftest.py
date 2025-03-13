@@ -1,5 +1,7 @@
 import pytest
 
+from src.backend.db.models import *
+from src.backend.schemas.user import *
 from src.backend.utils.generate import get_current_date
 
 
@@ -30,3 +32,12 @@ def mock_UserResponse_data():
         "updated_at": get_current_date()
         
     }
+    
+    
+######################## Schemas
+
+@pytest.fixture
+def mock_UserModel(mock_UserRegister_data):
+    return UserModel(
+        **mock_UserRegister_data
+    )

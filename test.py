@@ -1,5 +1,5 @@
 from src.backend.db.repositories.user import UserRepository
-from src.backend.db.repositories.user import UserDB
+from src.backend.db.models import UserModel
 from src.backend.schemas.user import UserLogin, UserRegister
 
 
@@ -9,7 +9,7 @@ email = "mauriciobenjamin700@gmail.com"
 password = "Aa1234567-"
 
 response = repository.create(
-    UserDB(
+    UserModel(
         username="Mauricio Benjamin",
         password=password,
         email=email

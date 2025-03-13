@@ -54,30 +54,6 @@ class UserRegister(BaseSchema):
     _password_validator = validate_password
 
 
-class UserDB(BaseSchema):
-    """
-    User in DB schema
-
-    - Args:
-        - id: str
-        - username: str
-        - email: str
-        - password: str
-        - created_at: str
-        - updated_at: str
-    """
-    id: str = id_field(generate=True)
-    username: str = username_field()
-    email: str = email_field()
-    password: str = password_field()
-    created_at: str = created_at_field(generate=True)
-    updated_at: str = created_at_field(generate=True)
-
-    _username_validator = validate_username
-    _email_validator = validate_email
-    _password_validator = validate_password
-
-
 class UserResponse(BaseSchema):
     """
     Data with user information

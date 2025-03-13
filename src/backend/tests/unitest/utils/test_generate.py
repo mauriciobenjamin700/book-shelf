@@ -33,7 +33,7 @@ def test_get_current_date():
     sep1 = result[4]
     month = result[5:7]
     sep2 = result[7]
-    day = result[8:]
+    day = result[8:10]
 
     # Assert
 

@@ -1,12 +1,20 @@
+from src.backend.constants.messages.server import (
+    ERROR_USER_REPOSITORY_CREATE_INPUT_TYPE,
+    ERROR_USER_REPOSITORY_GET_INPUT_TYPE,
+    ERROR_USER_REPOSITORY_UPDATE_INPUT_TYPE
+)
+from src.backend.db.models import UserModel
+from src.backend.db.settings.connection import DatabaseManager
 from src.backend.schemas.user import (
-    UserDB,
     UserLogin,
     UserRegister,
     UserResponse
 )
-from src.backend.db.settings.connection import DatabaseManager
 from src.backend.utils.generate import get_current_date
-from src.backend.utils.security.password import protect, verify
+from src.backend.utils.security.password import (
+    protect, 
+    verify
+)
 
 
 class UserRepository:
@@ -24,29 +32,35 @@ class UserRepository:
         self.db.connect()
         self.table_name = 'users'
 
-    def create(self, data: UserDB) -> UserResponse:
+    def create(self, data: UserModel) -> UserResponse:
         """
         Create a new user register in database
 
         - Args:
-            - data: UserDB: User Data
+            - data: UserModel: User Data
 
         - Returns
             - UserResponse: User data after register
         """
+        if not isinstance(data, UserModel):
+            raise ValueError(ERROR_USER_REPOSITORY_CREATE_INPUT_TYPE)
+        try:
+            data.password = protect(data.password)
+            
+            id = data.id
+            """
+            update_time {
+                seconds: 1741819898
+                nanos: 156255000
+            }
+            """
+            self.db.connection.collection(self.table_name).document(id).set(data.to_dict())
+                    
+            return UserResponse(**data.to_dict())
         
-        data.password = protect(data.password)
-        
-        id = data.id
-        """
-        update_time {
-            seconds: 1741819898
-            nanos: 156255000
-        }
-        """
-        self.db.connection.collection(self.table_name).document(id).set(data.to_dict())
-                
-        return UserResponse(**data.to_dict())
+        except Exception as e:
+            print(e)
+            return None
 
     def get(self, data: UserLogin) -> UserResponse | None:
         """
@@ -61,30 +75,56 @@ class UserRepository:
         """
         #response = self.db.connection.collection(self.table_name).where('email', '==', data.email).stream()
         
-        response = self.__get_reference(data.email).get()
+        if not isinstance(data, UserLogin):
+            raise ValueError(ERROR_USER_REPOSITORY_GET_INPUT_TYPE)
         
-        response = response.to_dict()
+        try:
+            
+            response = self.__get_reference(data.email).get()
+            
+            response = response.to_dict()
+            
+            if verify(data.password, response['password']):
+            
+                return UserResponse(**response)
+            
+            return None
         
-        if verify(data.password, response['password']):
-        
-            return UserResponse(**response)
-        
-        return None
+        except Exception as e:
+            print(e)
+            return
 
-    def update(self, data: UserRegister) -> UserResponse | None:
+
+    def update(self, login: UserLogin ,data: UserRegister) -> UserResponse | None:
         """
-        Update user data on database
+        Update user data on database, where email is the unique key and can't be updated
 
         - Args:
+            - login: UserLogin: User credentials to get user reference
             - data: UserRegister: Usar data to update
         
         - Returns:
             - UserResponse: User data after update
         """
+        if not isinstance(login, UserLogin):
+            raise ValueError(ERROR_USER_REPOSITORY_GET_INPUT_TYPE)
+        if not isinstance(data, UserRegister):
+            raise ValueError(ERROR_USER_REPOSITORY_UPDATE_INPUT_TYPE)
+        try:
+            user_ref = self.__get_reference(login.email)
         
-        user_ref = self.__get_reference(data.email)
+            user_ref.update({
+                "username": data.username, 
+                "email": data.email,
+                "password": protect(data.password), 
+                "updated_at": get_current_date()
+            })
+            
+            return UserResponse(**user_ref.get().to_dict())
         
-        user_ref.update({"username": data.username, "password": protect(data.password), "updated_at": get_current_date()})   
+        except Exception as e:
+            print(e)
+            return None
         
 
     def delete(self, data: UserLogin) -> bool:
@@ -94,6 +134,9 @@ class UserRepository:
         - Args:
             - data: UserLogin
         """
+        
+        if not isinstance(data, UserLogin):
+            raise ValueError(ERROR_USER_REPOSITORY_GET_INPUT_TYPE)
         
         try:
         
