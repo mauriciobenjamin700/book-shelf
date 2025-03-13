@@ -70,8 +70,8 @@ class BookModel(BaseSchema):
     author: str = str_field("Autor", "Autor do Livro", "José da Silva")
     pages: int = value_field("Páginas", "Número de Páginas", 100)
     year: int = value_field("Ano", "Ano de Publicação", 2021)
-    created_at: str = created_at_field()
-    updated_at: str = created_at_field(description="Data de Atualização")
+    created_at: str = created_at_field(generate=True)
+    updated_at: str = created_at_field(generate=True,description="Data de Atualização")
     
     _title_validator = validate_title
     _author_validator = validate_author

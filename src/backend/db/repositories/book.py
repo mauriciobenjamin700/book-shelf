@@ -1,6 +1,5 @@
 from src.backend.constants.messages.server import (
-    ERROR_BOOK_REPOSITORY_CREATE_INPUT_TYPE,
-    ERROR_BOOK_REPOSITORY_GET_INPUT_TYPE
+    ERROR_BOOK_REPOSITORY_CREATE_INPUT_TYPE
 )
 from src.backend.db.models import BookModel
 from src.backend.db.settings.connection import DatabaseManager
@@ -10,10 +9,6 @@ from src.backend.schemas.book import (
     BookResponse
 )
 from src.backend.utils.generate import get_current_date
-from src.backend.utils.security.password import (
-    protect, 
-    verify
-)
 
 
 class BookRepository:
