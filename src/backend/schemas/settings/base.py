@@ -49,3 +49,24 @@ class ValidationError(Exception):
         self.field = field
         self.detail = detail
         super().__init__(f"{field}: {detail}")
+        
+        
+class RequestError(Exception):
+    """
+    A class that represents the request error on a schema.
+    
+    - Args:
+        - status: int: The status code of the error.
+        - detail: str: The error message.
+        
+    - Status Legend:
+        - 401 - Unauthorized
+        - 404 - Not Found
+        - 409 - Conflict
+        - 500 - Internal Server Error
+    """
+    def __init__(self, status: int, detail: str):
+        
+        self.status_code = status
+        self.detail = detail
+        super().__init__(detail)
