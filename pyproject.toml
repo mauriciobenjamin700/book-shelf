@@ -1,0 +1,15 @@
+[project]
+name = "book-shelf"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12.3"
+dependencies = [
+    "firebase-admin>=6.7.0",
+    "pydantic>=2.10.6",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]
