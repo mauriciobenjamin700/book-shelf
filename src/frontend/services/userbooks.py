@@ -7,7 +7,7 @@ def get_books():
     books = service.get()
 
     return [
-        book.to_dict(exclude = ["created_at","updated_at"])
+        book.to_dict()
         for book in books
     ]
 
