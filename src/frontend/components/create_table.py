@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, Toplevel
 
 from src.frontend.constants.colors import FUNDO_AMARELO
+from src.frontend.services.userbooks import delete_book
 
 
 def create_table(search_entry, frame_container, data):
@@ -109,6 +110,7 @@ def create_table(search_entry, frame_container, data):
             def confirm_delete():
                 nonlocal data
                 data = [livro for livro in data if livro["id"] != selected_data["id"]]
+                delete_book(selected_data["id"])
                 update_table()
                 delete_window.destroy()
                 print(selected_data)

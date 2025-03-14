@@ -11,5 +11,7 @@ def get_books():
         for book in books
     ]
 
-def delete_book():
-    pass
+def delete_book(id: str):
+    
+    service = BookService()
+    service.delete(id)
