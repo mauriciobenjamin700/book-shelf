@@ -1,5 +1,7 @@
 # Projeto Book Shelf
 
+Este projeto é uma aplicação desktop destinada ao cadastro de livros. O usuário pode registrar seus livros fornecendo as seguintes informações e especificações: título, autor, ano de publicação e quantidade de páginas. Além de cadastrar novos livros, o usuário também tem a possibilidade de editar ou excluir os livros previamente cadastrados.
+
 ## Funcionalidades
 
 ### Autenticação do usuário
