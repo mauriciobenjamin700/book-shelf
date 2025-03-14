@@ -43,7 +43,7 @@ A pasta frontend lida com a interface visual do sistema e a experiência do usu�
 
 #### Tela de Boas-vindas
 
-A primeira tela que o usuário vê ao acessar o sistema. Existem dois botões, o "entrar" caso o usuario já possua um login cadastrado e o botão de registrar caso o usuário não tenha um login.
+A primeira tela que o usuário vê ao acessar o sistema. Existem dois botões, o "entrar" caso o usuário já possua um login cadastrado e o botão de registrar caso o usuário não tenha um login.
 
 ![](./docs/images/Tela%20de%20boas-vindas%20-%20Desktop.png)
 
@@ -61,7 +61,7 @@ Usada para criar uma nova conta no sistema, inserindo dados como nome, e-mail e 
 
 ![](./docs/images/Tela%20de%20Cadastro%20-%20Desktop.png)
 
-Após informar os dados e clicar no botão "Cadastrar", aparece uma tela informando que o cadstro foi realizado com sucesso, caso todas as informações estejam todas corretas.
+Após informar os dados e clicar no botão "Cadastrar", aparece uma tela informando que o cadastro foi realizado com sucesso, caso todas as informações estejam todas corretas.
 
 ![](./docs/images/Cadastro%20realizado.png)
 
