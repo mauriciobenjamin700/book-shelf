@@ -1,46 +1,43 @@
-from src.backend.db.repositories.user import UserRepository
-from src.backend.db.models import UserModel
-from src.backend.schemas.user import UserLogin, UserRegister
+"""
+This file is used to test the service layer of the application.
+"""
+
+from src.backend.schemas.book import BookRequest
+from src.backend.services.book import BookService
 
 
-repository = UserRepository()
+service = BookService()
 
-email = "mauriciobenjamin700@gmail.com"
-password = "Aa1234567-"
-
-response = repository.create(
-    UserModel(
-        username="Mauricio Benjamin",
-        password=password,
-        email=email
+response = service.create(
+    BookRequest(
+        title="The Hobbit",
+        author="J.R.R. Tolkien",
+        pages=310,
+        year=1937
     )
 )
 
-print("CREATE: ", response)
+print(response)
 
-# response = repository.get(
-#     data=UserLogin(
-#         email=email,
-#         password=password
-#     )
-# )
-
-# print("GET: ", response)
-
-# repository.update(
-#     UserRegister(
-#         username="ROBES",
-#         password=password,
-#         email=email
-#     )
-# )
-
-
-delete = repository.delete(
-    UserLogin(
-        email=email,
-        password=password
+response = service.create(
+    BookRequest(
+        title="The Lord of the Rings",
+        author="J.R.R. Tolkien",
+        pages=1,
+        year=1954
     )
 )
 
-print("SUMIU? ", delete)
+print(response)
+
+
+response = service.create(
+    BookRequest(
+        title="Dom Casmurro",
+        author="Machado de Assis",
+        pages=3,
+        year=1899
+    )
+)
+
+print(response)

@@ -17,12 +17,30 @@ from src.backend.schemas.settings.base import (
 
 
 class BookService:
+    """
+    Class to manage the business logic of the book entity
+    
+    - methods:
+        - create: Create a book
+        - get: Get a book
+        - update: Update a book
+        - delete: Delete a book
+    
+    """
     def __init__(self):
         self.__repo = BookRepository()
         
         
     def create(self, request: BookRequest) -> BookResponse:
-    
+        """
+        Create a book on the database
+        
+        - Args:
+            - request: BookRequest
+            
+        - Returns:
+            - BookResponse: The book created on the database
+        """
         try:
             if not isinstance(request, BookRequest):
                 
@@ -57,8 +75,16 @@ class BookService:
             raise RequestError(500, ERROR_SERVER)
         
 
-    def get(self, filters: BookFilters | None = None) -> BookResponse:
+    def get(self, filters: BookFilters | None = None) -> list[BookResponse]:
+        """
+        Get a list of books from the database
         
+        - Args:
+            - filters: BookFilters
+            
+        - Returns:
+            - list[BookResponse]: A list of books
+        """
         try:
             
             book = self.__repo.get(filters)
@@ -81,6 +107,16 @@ class BookService:
             raise RequestError(500, ERROR_SERVER)
             
     def update(self, id: str, request: BookRequest) -> BookResponse:
+        """
+        Update a book on the database   
+        
+        - Args:
+            - id: str = The id of the book
+            - request: BookRequest: new data for the book
+            
+        - Returns:
+            - BookResponse: The book updated on the database
+        """
         try:
             
             if not isinstance(request, BookRequest):
@@ -108,6 +144,15 @@ class BookService:
             raise RequestError(500, ERROR_SERVER)
             
     def delete(self, id: str) -> None:
+        """
+        Delete a book from the database
+        
+        - Args:
+            - id: str = The id of the book
+        
+        - Returns:
+            - None
+        """
         try:
             
             result = self.__repo.delete(id)
