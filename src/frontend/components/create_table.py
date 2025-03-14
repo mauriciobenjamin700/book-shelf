@@ -3,9 +3,10 @@ from tkinter import ttk, Toplevel
 
 from src.frontend.constants.colors import FUNDO_AMARELO
 from src.frontend.services.userbooks import delete_book
+from src.frontend.pages import book_register, book_edit
 
 
-def create_table(search_entry, frame_container, data):
+def create_table(search_entry, frame_container, data, root = None):
     """
     Cria uma tabela reutilizável para exibição de livros.
 
@@ -23,6 +24,21 @@ def create_table(search_entry, frame_container, data):
         pos_x = (largura_tela - largura_janela) // 2
         pos_y = (altura_tela - altura_janela) // 2
         return(f"{largura_janela}x{altura_janela}+{pos_x}+{pos_y}")
+
+    def handle_register():
+        table_frame.destroy()
+        book_register.main(frame_container)
+
+    def handle_edit(selected_data: dict):
+        table_frame.destroy()
+        book_edit.main(
+            frame_container, 
+            id=selected_data["id"],
+            base_title=selected_data["title"],
+            base_author=selected_data["author"],
+            base_pages=selected_data["pages"],
+            base_year=selected_data["year"]
+        )
     
     table_frame = tk.Frame(frame_container, bg="white")
     table_frame.pack(pady=10, fill="both", expand=True)
@@ -79,7 +95,14 @@ def create_table(search_entry, frame_container, data):
     load_data()
     search_entry.trace_add("write", search_books)
 
-    btn_editar = tk.Button(button_frame, text="Edit", command=lambda: open_edit_window(button_frame.selected_data))  # Mudança aqui
+    btn_register = tk.Button(
+        button_frame, 
+        text="Cadastrar", 
+        command=handle_register
+    ) # Mudança aqui
+    btn_register.pack(side="left", padx=10)
+
+    btn_editar = tk.Button(button_frame, text="Edit", command=lambda: handle_edit(button_frame.selected_data))  # Mudança aqui
     btn_editar.pack(side="left", padx=10)
 
     btn_deletar = tk.Button(button_frame, text="Delete", command=lambda: open_delete_window(button_frame.selected_data))  # Mudança aqui

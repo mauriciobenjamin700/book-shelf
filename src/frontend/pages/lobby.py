@@ -51,4 +51,4 @@ def main(root):
     # Adicionando a barra de pesquisa
     search_entry = create_search_bar(frm)
 
-    create_table(search_entry,frm,filtered_data)
+    create_table(search_entry,frm,filtered_data, root)
