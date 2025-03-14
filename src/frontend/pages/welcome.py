@@ -27,7 +27,7 @@ def main():
     root = tk.Tk()  
     root.title("Book Shelf")  
     root.update_idletasks()  
-    largura, altura = 1280, 720  
+    largura, altura = 1280, 720 
     centralizar_janela(root, largura, altura)  
     root.resizable(False, False)  
 

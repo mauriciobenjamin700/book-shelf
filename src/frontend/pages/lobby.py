@@ -21,16 +21,20 @@ def main(root):
     ]
     '''
     
-    
+    '''
     data = [
-    {"ID":"33r2dw","titulo": "O Senhor dos Anéis", "autor": "J.R.R. Tolkien", "numero_paginas": 1, "ano": 1954},
-    {"ID": "121DDW","titulo": "Dom Casmurro", "autor": "Machado de Assis", "numero_paginas": 3, "ano": 1899}
+    {"id": "1", "titulo": "Livro A", "autor": "Autor A", "numero_paginas": 200, "ano": 2020},
+    {"id": "2", "titulo": "Livro B", "autor": "Autor B", "numero_paginas": 150, "ano": 2021}
     ]
+    '''
     
-    
-    #data = get_books()
-    #print(data)
+    print("chegou aqui")
+    data = get_books()
+    print(data)
 
+    filtered_data = [{k: v for k, v in book.items() if k not in ["created_at", "updated_at"]} for book in data]
+
+    print(filtered_data)
 
     # Função para fechar a aplicação
     def sair():
@@ -47,4 +51,4 @@ def main(root):
     # Adicionando a barra de pesquisa
     search_entry = create_search_bar(frm)
 
-    create_table(search_entry,frm,data)
+    create_table(search_entry,frm,filtered_data)
