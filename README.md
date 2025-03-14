@@ -132,6 +132,7 @@ As credenciais de serviço contêm as chaves privadas necessárias para autentic
 
 Recomendamos fortemente o uso de um sistema operacional Linux ou WSL caso esteja no Windows.
 
+- Baixe o repositório usando `git clone https://github.com/mauriciobenjamin700/book-shelf`.
 - Tenha o Python 3.12 ou superior na maquina.
 - Crie um ambiente virtual, como por exemplo utilizando o comando: `python3 -m venv venv`.
 - Iniciar o ambiente virtual, como utilizando o comando `source venv/bin/activate`.
