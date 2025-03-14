@@ -69,7 +69,7 @@ class UserResponse(BaseSchema):
     username: str = username_field()
     email: str = email_field()
     created_at: str = created_at_field(generate=False)
-    updated_at: str = created_at_field(generate=False)
+    updated_at: str = created_at_field(generate=False, description="Data de atualização")
     
     _username_validator = validate_username
     _email_validator = validate_email

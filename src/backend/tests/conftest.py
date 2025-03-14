@@ -33,6 +33,15 @@ def mock_UserResponse_data():
         
     }
     
+@pytest.fixture
+def mock_BookRegister_data():
+    return {
+        "title": "Book Title",
+        "author": "Book Author",
+        "pages": 100,
+        "year": 2021
+    }
+    
     
 ######################## Schemas
 
@@ -52,4 +61,10 @@ def mock_UserLogin(mock_UserLogin_data):
 def mock_UserRegister(mock_UserRegister_data):
     return UserRegister(
         **mock_UserRegister_data
+    )
+    
+@pytest.fixture
+def mock_BookModel(mock_BookRegister_data):
+    return BookModel(
+        **mock_BookRegister_data
     )
