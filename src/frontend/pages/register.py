@@ -1,15 +1,36 @@
 import tkinter as tk
 from tkinter import ttk
-from PIL import Image, ImageTk  # Para manipulação de imagens
+from PIL import Image, ImageTk
 
-def centralizar_janela(root, largura, altura):
-    largura_tela = root.winfo_screenwidth()
-    altura_tela = root.winfo_screenheight()
-    pos_x = (largura_tela - largura) // 2
-    pos_y = (altura_tela - altura) // 2
-    root.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
+from src.frontend.components import modal
+from src.frontend.pages import login
+from src.frontend.services.user import user_register
 
-def abrir_cadastro(root):  # Renomeado para ser chamado externamente
+
+
+def abrir_cadastro(root):
+    
+    def handle_register():
+        try:
+            name = entries[0].get()
+            email = entries[1].get()
+            password = entries[2].get()
+            confirm_password = entries[3].get()
+
+            if password != confirm_password:
+                print("Senhas não conferem!")
+                modal.main(frm, "Atenção", "Senhas não conferem!", modal.ModalTypes.WARNING.value)
+            
+            else:
+                response = user_register(name, email, password)
+                print(response)
+                modal.main(root, "Sucesso", "Cadastro realizado com sucesso!", modal.ModalTypes.INFO.value)
+                frm.destroy()
+                login.main(root)
+        
+        except Exception as e:
+            print(e)
+            modal.main(root, "Erro", "Erro ao realizar cadastro!", modal.ModalTypes.ERROR.value)
     
     # Criando um frame centralizado
     frm = ttk.Frame(root, padding=10)
@@ -40,7 +61,7 @@ def abrir_cadastro(root):  # Renomeado para ser chamado externamente
     # Botão de cadastro (imagem)
     img_botao = Image.open("src/frontend/assets/images/cadastrar.png").resize((200, 60), Image.Resampling.LANCZOS)
     img_botao = ImageTk.PhotoImage(img_botao)
-    botao_cadastrar = tk.Button(frm, image=img_botao, borderwidth=0, command=lambda: print("Cadastro realizado!"))
+    botao_cadastrar = tk.Button(frm, image=img_botao, borderwidth=0, command=handle_register)
     botao_cadastrar.image = img_botao  
     botao_cadastrar.pack(anchor="e", pady=(20, 0))
 

@@ -141,6 +141,7 @@ Recomendamos fortemente o uso de um sistema operacional Linux ou WSL caso esteja
 - Instalar as bibliotecas necessárias
     - `pip3 install pydantic`
     - `pip3 install firebase_admin`
+    - `pip3 install pillow`
     - Solicite o arquivo de credenciais para usar o firebase a nossa equipe: pedrovital015692@gmail.com
     - Abra o seu terminal na raiz do projeto.
     - Execute o comando `python3 run.py`

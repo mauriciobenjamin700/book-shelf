@@ -5,14 +5,6 @@ from PIL import Image, ImageTk
 from src.frontend.pages import lobby
 from src.frontend.services.user import user_login  
 
-def centralizar_janela(janela, largura, altura):
-    largura_tela = janela.winfo_screenwidth()
-    altura_tela = janela.winfo_screenheight()
-    pos_x = (largura_tela - largura) // 2
-    pos_y = (altura_tela - altura) // 2
-    janela.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
-
-
 
 def main(root):
 
