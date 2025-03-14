@@ -128,4 +128,18 @@ O acesso ao banco de dados do Firebase é controlado por credenciais de serviço
 
 As credenciais de serviço contêm as chaves privadas necessárias para autenticação com os serviços do Firebase, incluindo o banco de dados. Para evitar acessos não autorizados, é fundamental que as credenciais sejam mantidas em segurança e somente os donos do sistema ou administradores devidamente autorizados tenham acesso a elas.
 
+## Como executar o projeto
+
+Recomendamos fortemente o uso de um sistema operacional Linux ou WSL caso esteja no Windows.
+
+- Tenha o Python 3.12 ou superior na maquina.
+- Crie um ambiente virtual, como por exemplo utilizando o comando: `python3 -m venv venv`.
+- Iniciar o ambiente virtual, como utilizando o comando `source venv/bin/activate`.
+- Instalar as bibliotecas necessárias
+    - `pip3 install pydantic`
+    - `pip3 install firebase_admin`
+    - Solicite o arquivo de credenciais para usar o firebase a nossa equipe: pedrovital015692@gmail.com
+    - Abra o seu terminal na raiz do projeto.
+    - Execute o comando `python3 run.py`
+
 [figma](https://www.figma.com/design/xrLJrHbZujpruzcU3WVu6Q/Biblioteca-de-livro?node-id=0-1&t=uGWfxSLcHEIC9Gh8-1)
