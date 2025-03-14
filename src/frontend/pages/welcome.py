@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk  # Pillow para redimensionamento de imagens
 from src.frontend.pages.login import main as abrir_login
-from src.frontend.pages.register import abrir_cadastro as abrir_register
+from src.frontend.pages.register import abrir_cadastro
 
 # Função para centralizar a janela no meio da tela
 def centralizar_janela(root, largura, altura):
@@ -14,6 +14,16 @@ def centralizar_janela(root, largura, altura):
 
 # Função principal para criar a interface gráfica
 def main():
+
+    def handle_login():
+        frm.destroy()
+        abrir_login(root)
+    
+    
+    def handle_register():
+        abrir_cadastro(root)
+        frm.destroy()
+    
     root = tk.Tk()  
     root.title("Book Shelf")  
     root.update_idletasks()  
@@ -47,11 +57,11 @@ def main():
     welcome_label.pack(pady=(10, 20))  
 
     # Botão "Entrar" que chama a tela de login
-    entrar_button = tk.Button(frm, image=img_entrar, borderwidth=0, command=abrir_login)
+    entrar_button = tk.Button(frm, image=img_entrar, borderwidth=0, command=handle_login)
     entrar_button.pack(pady=10)
 
     # Botão "Cadastrar"
-    cadastrar_button = tk.Button(frm, image=img_cadastrar, borderwidth=0, command=abrir_register)
+    cadastrar_button = tk.Button(frm, image=img_cadastrar, borderwidth=0, command=handle_register)
     cadastrar_button.pack(pady=10)
 
     # Manter referências das imagens para evitar descarte pelo Garbage Collector

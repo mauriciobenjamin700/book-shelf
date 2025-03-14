@@ -9,15 +9,10 @@ def centralizar_janela(root, largura, altura):
     pos_y = (altura_tela - altura) // 2
     root.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
 
-def abrir_cadastro():  # Renomeado para ser chamado externamente
-    cadastro = tk.Toplevel()  # Criar nova janela
-    cadastro.title("Book Shelf - Cadastro")
-    largura, altura = 1280, 720
-    centralizar_janela(cadastro, largura, altura)
-    cadastro.resizable(False, False)
-
+def abrir_cadastro(root):  # Renomeado para ser chamado externamente
+    
     # Criando um frame centralizado
-    frm = ttk.Frame(cadastro, padding=10)
+    frm = ttk.Frame(root, padding=10)
     frm.place(relx=0.5, rely=0.5, anchor="center")
 
     # Carregar imagem do topo
@@ -49,6 +44,4 @@ def abrir_cadastro():  # Renomeado para ser chamado externamente
     botao_cadastrar.image = img_botao  
     botao_cadastrar.pack(anchor="e", pady=(20, 0))
 
-    # Mantendo referências para evitar descarte
-    cadastro.img_logo = img_logo
-    cadastro.img_botao = img_botao
+   
